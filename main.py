@@ -8,6 +8,7 @@ from circleshape import *
 from player import *
 from asteroid import *
 from asteroidfield import *
+import random
 
 def main():
     pygame.init()
@@ -35,7 +36,7 @@ def main():
                 sys.exit("Game Over!")
             for bullet in bullets:
                 if asteroid.collision(bullet) == True:
-                    asteroid.kill()
+                    asteroid.split(asteroid.radius, asteroid.position, asteroid.velocity)
                     bullet.kill()
         screen.fill("black")
         for pic in drawable:
