@@ -36,7 +36,7 @@ def main():
                 sys.exit("Game Over!")
             for bullet in bullets:
                 if asteroid.collision(bullet):
-                    asteroid.kill()
+                    asteroid.split(asteroid.position, asteroid.velocity, asteroid.radius)
                     bullet.kill()
         screen.fill("Black")
         for drawing in drawable:
