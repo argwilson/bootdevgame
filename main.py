@@ -33,6 +33,10 @@ def main():
         for asteroid in asteroids:
             if asteroid.collision(player) == True:
                 sys.exit("Game Over!")
+            for bullet in bullets:
+                if asteroid.collision(bullet) == True:
+                    asteroid.kill()
+                    bullet.kill()
         screen.fill("black")
         for pic in drawable:
             pic.draw(screen)
