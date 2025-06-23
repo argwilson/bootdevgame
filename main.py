@@ -2,6 +2,7 @@
 # the open-source pygame library
 # throughout this file
 import pygame
+import pygame.freetype
 import sys
 from constants import *
 from player import *
@@ -11,6 +12,7 @@ from bullet import *
 
 def main():
     pygame.init()
+    font = pygame.freetype.SysFont(GAME_FONT, FONT_SIZE)
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     updatable = pygame.sprite.Group()
     drawable = pygame.sprite.Group()
@@ -26,10 +28,12 @@ def main():
 
     clock = pygame.time.Clock()
     dt = 0
+    score = 0
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return
+        
         updatable.update(dt)
         for asteroid in asteroids:
             if asteroid.collision(player):
@@ -38,9 +42,15 @@ def main():
                 if asteroid.collision(bullet):
                     asteroid.split(asteroid.position, asteroid.velocity, asteroid.radius)
                     bullet.kill()
+                    score += 10
+        
+
         screen.fill("Black")
+        font.render_to(screen, (SCORE_X, SCORE_Y), f"SCORE: {score}", "white")
         for drawing in drawable:
             drawing.draw(screen)
+        
+
         pygame.display.flip()
         dt = clock.tick(60)/1000
 
