@@ -29,6 +29,7 @@ def main():
     clock = pygame.time.Clock()
     dt = 0
     score = 0
+    lives = 3
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -37,16 +38,24 @@ def main():
         updatable.update(dt)
         for asteroid in asteroids:
             if asteroid.collision(player):
-                sys.exit("Game Over!")
+                if lives > 0:
+                    lives -= 1
+                    player.kill()
+                    player = Player(SCREEN_WIDTH/2, SCREEN_HEIGHT/2)
+                else:
+                    sys.exit("Game Over!")
             for bullet in bullets:
                 if asteroid.collision(bullet):
                     asteroid.split(asteroid.position, asteroid.velocity, asteroid.radius)
                     bullet.kill()
                     score += 10
+                    if score % 500 == 0:
+                        lives += 1
         
 
         screen.fill("Black")
         font.render_to(screen, (SCORE_X, SCORE_Y), f"SCORE: {score}", "white")
+        font.render_to(screen, (LIVES_X, LIVES_Y), f"LIVES: {lives}", "white")
         for drawing in drawable:
             drawing.draw(screen)
         
