@@ -3,11 +3,10 @@ from constants import *
 from bullet import *
 
 class Player(CircleShape):
-    timer = 0.0
-
     def __init__(self, x, y):
         super().__init__(x, y, PLAYER_RADIUS)
         self.rotation = 0
+        self.timer = 0.0
 
     # in the player class
     def triangle(self):
@@ -33,8 +32,8 @@ class Player(CircleShape):
         return pygame.draw.polygon(screen, "white", self.triangle(), width = 2)
     
     def update(self, dt):
-        if Player.timer > 0:
-            Player.timer -= dt
+        if self.timer > 0:
+            self.timer -= dt
         keys = pygame.key.get_pressed()
 
         if keys[pygame.K_a]:
@@ -48,7 +47,7 @@ class Player(CircleShape):
             return self.move(dt)
         
         if keys[pygame.K_SPACE]:
-            if Player.timer > 0:
+            if self.timer > 0:
                 return
-            Player.timer = PLAYER_SHOOT_COOLDOWN
+            self.timer = PLAYER_SHOOT_COOLDOWN
             return self.shoot(self.position, self.rotation)

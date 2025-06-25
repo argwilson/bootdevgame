@@ -1,5 +1,6 @@
 import random
 from circleshape import *
+from explosions import *
 from constants import *
 
 class Asteroid(CircleShape):
@@ -8,6 +9,7 @@ class Asteroid(CircleShape):
 
     def split(self, position, velocity, radius):
         self.kill()
+        Explosion(position.x, position.y, 2*radius)
         if radius < ASTEROID_MIN_RADIUS:
             return
         return self.spawn(position, velocity, radius)
