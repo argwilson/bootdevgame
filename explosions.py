@@ -9,12 +9,17 @@ class Explosion(LineShape):
         self.timer = 0.0
 
     def explosion(self):
-        top = self.position + pygame.Vector2(1, 0) * self.scale
-        upper_right = self.position + pygame.Vector2(1, 0).rotate(-72) * self.scale
-        upper_left = self.position + pygame.Vector2(1, 0).rotate(72) * self.scale
-        lower_right = self.position + pygame.Vector2(1, 0).rotate(-144) * self.scale
-        lower_left = self.position + pygame.Vector2(1, 0).rotate(144) * self.scale
-        return [top, lower_left, upper_right, upper_left, lower_right]
+        a = self.position + pygame.Vector2(1, 0) * self.scale * random.uniform(0.8, 1.2)
+        b = self.position + pygame.Vector2(1, 0).rotate(36) * (self.scale/3) * random.uniform(0.8, 1.2)
+        c = self.position + pygame.Vector2(1, 0).rotate(72) * self.scale * random.uniform(0.8, 1.2)
+        d = self.position + pygame.Vector2(1, 0).rotate(108) * (self.scale/3) * random.uniform(0.8, 1.2)
+        e = self.position + pygame.Vector2(1, 0).rotate(144) * self.scale * random.uniform(0.8, 1.2)
+        f = self.position + pygame.Vector2(-1, 0) * (self.scale/3) * random.uniform(0.8, 1.2)
+        g = self.position + pygame.Vector2(1, 0).rotate(-144) * self.scale * random.uniform(0.8, 1.2)
+        h = self.position + pygame.Vector2(1, 0).rotate(-108) * (self.scale/3) * random.uniform(0.8, 1.2)
+        i = self.position + pygame.Vector2(1, 0).rotate(-72) * self.scale * random.uniform(0.8, 1.2)
+        j = self.position + pygame.Vector2(1, 0).rotate(-36) * (self.scale/3) * random.uniform(0.8, 1.2)
+        return [a, b, c, d, e, f, g, h, i ,j]
 
     def draw(self, screen):
         pygame.draw.lines(screen, "white", True, self.explosion(), width = 2)

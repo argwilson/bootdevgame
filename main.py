@@ -23,7 +23,7 @@ def main():
     Bullet.containers = (bullets, updatable, drawable)
     Asteroid.containers = (asteroids, updatable, drawable)
     AsteroidField.containers = (updatable)
-    Explosion.containers = (updatable, drawable)
+    Explosion.containers = (explosions, updatable, drawable)
 
     player = Player(SCREEN_WIDTH/2, SCREEN_HEIGHT/2)
     AsteroidField()
@@ -31,7 +31,7 @@ def main():
     clock = pygame.time.Clock()
     dt = 0
     score = 0
-    lives = 3
+    lives = 2
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
