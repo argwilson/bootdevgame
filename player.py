@@ -59,3 +59,12 @@ class Player(CircleShape):
                 return
             self.timer = PLAYER_SHOOT_COOLDOWN
             return self.shoot(self.position, self.rotation)
+        
+        if self.position.x > SCREEN_WIDTH:
+            self.position.x -= SCREEN_WIDTH
+        if self.position.x < 0:
+            self.position.x += SCREEN_WIDTH
+        if self.position.y > SCREEN_HEIGHT:
+            self.position.y -= SCREEN_HEIGHT
+        if self.position.y < 0:
+            self.position.y += SCREEN_HEIGHT
